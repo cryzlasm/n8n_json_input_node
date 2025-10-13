@@ -27,8 +27,14 @@ jobs:
     - name: Install dependencies
       run: npm install --no-package-lock
 
+    - name: Check files before build
+      run: ls -la
+
     - name: Build
       run: npm run build
+
+    - name: Check files after build
+      run: ls -la dist/
 
     - name: Run tests
       run: npm test
@@ -36,9 +42,13 @@ jobs:
     - name: Type checking
       run: npm run typecheck
 
-    - name: List dist directory
+    - name: List dist directory for tag builds
       if: github.ref_type == 'tag'
-      run: ls -la dist/
+      run: |
+        echo "Dist directory contents:"
+        ls -la dist/
+        echo "Files in dist:"
+        find dist/ -type f
 
     - name: Create Release Artifact
       if: github.ref_type == 'tag'
