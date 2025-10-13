@@ -1,4 +1,4 @@
-import { IExecuteFunctions } from 'n8n-core';
+import { NodeExecuteFunctions } from 'n8n-core';
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class JsonInput implements INodeType {
@@ -25,7 +25,7 @@ export class JsonInput implements INodeType {
     ],
   };
 
-  async execute(this: IExecuteFunctions) {
+  async execute(this: NodeExecuteFunctions) {
     const items = this.getInputData();
     const returnData = [];
 
