@@ -22,6 +22,7 @@ export class JsonInput implements INodeType {
         description: 'Input your JSON here',
       },
     ],
+    icon: 'file:json_icon.png'
   };
 
   async execute(this: any) {
