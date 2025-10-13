@@ -1,0 +1,45 @@
+name: Build and Validate
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.19.0]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Run tests
+      run: npm test
+
+    - name: Type checking
+      run: npm run typecheck
+
+    - name: Create Release Artifact
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-node
+        path: dist/
+        retention-days: 1

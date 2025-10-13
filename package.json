@@ -1,0 +1,28 @@
+{
+  "name": "n8n-json-input-node",
+  "version": "1.0.0",
+  "description": "A custom n8n node for JSON input",
+  "main": "dist/JsonInput.node.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "n8n",
+    "node",
+    "json",
+    "input"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "n8n-core": "^1.0.0",
+    "n8n-workflow": "^1.0.0"
+  }
+}
