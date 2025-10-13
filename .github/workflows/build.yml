@@ -37,11 +37,11 @@ jobs:
       run: npm run typecheck
 
     - name: List dist directory
-      if: startsWith(github.ref, 'refs/tags/')
+      if: github.ref_type == 'tag'
       run: ls -la dist/
 
     - name: Create Release Artifact
-      if: startsWith(github.ref, 'refs/tags/')
+      if: github.ref_type == 'tag'
       uses: actions/upload-artifact@v4
       with:
         name: compiled-node
@@ -49,12 +49,12 @@ jobs:
         retention-days: 1
 
     - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/')
+      if: github.ref_type == 'tag'
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
         draft: false
         prerelease: false
