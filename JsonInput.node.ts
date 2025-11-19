@@ -4,7 +4,7 @@ export class JsonInput implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'Json Input',
     name: 'jsonInput',
-    group: ['transform'],
+    group: ['transform', 'utility'],
     version: 1,
     description: 'A custom node that accepts JSON input',
     defaults: {
@@ -19,6 +19,7 @@ export class JsonInput implements INodeType {
         name: 'content',
         type: 'json',
         default: '',
+        placeholder: '{ "key": "value" }',
         description: 'Input your JSON here',
       },
     ],
